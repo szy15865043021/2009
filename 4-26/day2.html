@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    var fun1 =new Function('a','b','return a+b');
+    console.log(fun1);
+    console.log(fun1(50,50));
+
+function add(num1,num2){
+    return num1+num2
+}
+console.log(add(11,22));
+function app(a,b){
+    return a-b;
+}
+console.log(app(50,10));
+
+
+var abc=function(num1,num2){
+    return num1-num2
+}
+console.log(abc(11,22));
+
+
+// 形参实参
+    function bu(num1,num2){
+        return num1+num2
+    }
+    function test(a,b,fun){
+        return fun(a,b)
+    }
+
+    var a=11;
+    var b=22;
+
+    var res=test(a,b,add)
+
+    console.log(res);
+
+
+</script>
+
+
+
+</html>
