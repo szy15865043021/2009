@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 获取66全部位置
+        // var arr = [11,22,22,55,66,11,88,66,77,66,11,11,11]
+
+        // var abc=[];
+        // arr.forEach(function(v,k){
+        //     if(v==66){
+        //         console.log(k);
+        //         abc.push(k);
+        //     }
+        // })
+        // console.log(abc);
+        
+
+        //封装
+        var arr = [11,22,22,55,66,11,88,66,77,66,11,11,11]
+        function getPos(arr,x){
+            var pos=[]
+            arr.forEach(function(v,k){
+                if(v==x){
+                    console.log(k)
+                    pos.push(k)
+                }
+            })
+            return pos
+        }
+        console.log(getPos(arr,11));
+    </script>
+</body>
+</html>
