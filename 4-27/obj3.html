@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        123
+    </div>
+    <button id="btn">添加</button>
+    <p class="p1">123</p>
+    <p class="p1">466</p>
+    <p class="p1">789</p>
+    <script src="../jquery-3.6.0.min.js"></script>
+    <script>
+        function $(el) {
+            var i = el[0];
+            if (i == "#") {
+                alert("ID选择器");
+            } else if (i == ".") {
+                alert("类选择器")
+            } else {
+                alert("标签选择器");
+            }
+        }
+        $('span')
+
+    </script>
+</body>
+
+</html>
