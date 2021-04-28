@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+</head>
+<script src="./ajax.js"></script>
+<body>
+<input type="text" id="username" name="username">
+<button id="btn">提交</button>
+<ul>
+   <li></li>
+</ul>
+<script>
+    var btn  = document.getElementById("btn")
+    btn.onclick = function(){
+        var username = document.getElementById('username').value;
+        console.log(username)
+        ajax({
+            type:"get",
+            dataType:"json",
+            url:"ajax.php",
+            data:{username:username},
+            success:function (data) {
+             var li = document.querySelector('li').innerText=data
+
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
