@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class A{
+            //构造方法
+            constructor(){
+
+            }
+            //定义一个静态方法  使用 类名.方法名访问  不需要实例化
+            static hello(){
+                console.log("hello");
+            }
+
+            han(){
+                console.log("ahh");
+            }
+        }
+
+        let obj1=new A()
+        obj1.han()
+        A.hello()
+    </script>
+</body>
+</html>

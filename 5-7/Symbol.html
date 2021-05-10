@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // const s=Symbol();
+    // 新增类型 Symbol
+    // console.log(typeof s);
+
+    const a={
+        name:"buhui",
+        age:"sb",
+    }
+
+    const b={
+        // [Symbol("name")]:"同在",
+        sex:"未知",
+    }
+
+    const c={
+        name:"屁",
+        email:"4561@123.com",
+    }
+    // Object.assign()方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。他将返回目标对象
+    // target：新对象，用来接受的对象
+    // sources：源对象。
+
+    let abc=Object.assign(a,b,c)
+    console.log(abc);
+
+
+
+        const info_A={
+            [Symbol("name")]:"namea",
+            [Symbol("age")]:44,
+            [Symbol("sex")]:"保密",
+            [Symbol("address")]:"日本",
+        }
+
+        const info_B={
+            [Symbol("name")]:"nameb",
+            [Symbol("age")]:67,
+            [Symbol("sex")]:"m",
+            [Symbol("address")]:"东京",
+        }
+
+        let nan=Object.assign(info_A,info_B);
+        console.log(nan);
+        // 属性加上 Symbol 相同属性名可以共同存在
+
+
+
+
+
+</script>
+
+</html>
