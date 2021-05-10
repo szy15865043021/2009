@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        var puso="";
+        $.ajax({
+            url:"http://vue.api.comcto.com/api/password1.php",
+            method:'get',
+            async:false,
+            success:function(res){
+                puso+=res
+                // console.log("服务器返回值：",puso);
+            }
+        })
+
+        $.ajax({
+            url:"http://vue.api.comcto.com/api/password2.php",
+            method:'get',
+            async:false,
+            success:function(res){
+                puso+=res
+                // console.log("服务器返回值：",puso);
+            }
+        })
+
+        $.ajax({
+            url:"http://vue.api.comcto.com/api/password3.php",
+            method:'get',
+            async:false,
+            success:function(res){
+                puso+=res
+                // console.log("服务器返回值：",puso);
+            }
+        })
+
+        $.ajax({
+            url:"http://vue.api.comcto.com/api/password4.php",
+            method:'get',
+            async:false,
+            success:function(res){
+                puso+=res
+                // console.log("服务器返回值：",puso);
+
+                var nan=Array(puso);
+                // console.log(nan);
+
+                console.log(nan.toString());
+                console.log(typeof nan.toString());
+               
+                
+            }
+        })
+
+        // var a=[11,22,33]
+        // console.log(typeof a.toString());
+    </script>
+</body>
+</html>

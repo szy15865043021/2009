@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj2={
+            name:"wangwu",
+            age:"22",
+            sex:"Male",
+            email:"wangwu@qq.com"
+        }
+
+        //定义一个生成器函数，作为迭代器接口
+        function * it(){
+            for(k in this){
+                yield this[k]
+            }
+        }
+
+        console.log(Object.prototype);3
+        Object.prototype[Symbol.iterator]=it
+
+        for(v of obj2){
+            console.log(v);
+        }
+
+
+    </script>
+</body>
+</html>
