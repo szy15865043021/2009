@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        let api_url="http://vue.api.comcto.com/api/books.php"
+        axios.get(api_url).then(function(d){
+            console.log("Promise对象：",d);
+            //服务器返回的数据 在 d.data 字段中
+            console.log(d.data);
+        })
+    </script>
+</body>
+</html>
