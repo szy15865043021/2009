@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>基于vue-router的案例</title>
+  <link rel="stylesheet" href="../5-21/admin.css">
+</head>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script src="../js/axios.min.js"></script>
+  <script src="../js/vue-router.js"></script>
+  <script>
+    let App = {
+      template: `  <div>
+    
+      <header class="header">XX后台管理系统</header>
+    
+      <div class="main">
+
+        <div class="content left">
+          <ul>
+            <li><router-link to="/user">用户管理</router-link></li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+          </ul>
+        </div>
+       
+        <div class="content right"><div class="main-content"><router-view></router-view></div></div>
+      </div>
+    
+      <footer class="footer">版权信息</footer>
+    </div>`
+    }
+
+
+    //用户
+    let user = {
+      data(){
+        return {
+          list:[]
+        }
+      },
+      created(){
+        let self=this
+        let api="http://localhost:3001/uname/list"
+        axios.get(api).then(function(res){
+          self.list=res.data
+        })
+      },
+      methods:{
+        del(k){
+          // console.log(this.list[k].id);
+          let self=this
+          let id=this.list[k].id
+          axios.delete("http://localhost:3001/uname/del?id="+id).then(function(res){
+            self.list.splice(k,1)
+          })
+        }
+      },
+      template: `<div><h3>用户管理</h3>
+          <table border='1'>
+              <tr>
+                <th>编号</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>操作</th>
+                </tr>
+                <tr v-for="(item,k) in list" :key="item.id">
+  <td>{{item.id}}</td>
+  <td>{{item.uname}}</td>
+  <td>{{item.unl}}</td>
+  <td><a href='' @click.prevent="del(k)">删除</a></td>
+</tr>
+            </table>
+          </div>`
+    }
+
+    let routes = [
+      { path: "/", component: App,children:[
+        {path:"/user",component:user}
+      ]}
+    ]
+
+    let router = new VueRouter({
+      routes: routes
+    })
+
+    new Vue({
+      el: "#app",
+      router: router
+    })
+  </script>
+</body>
+
+</html>

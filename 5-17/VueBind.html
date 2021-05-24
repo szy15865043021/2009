@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--样式-->
+    <style>
+        .pcolor {
+            color:red;
+        }
+        .psize{
+            font-size:30px
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+<p v-bind:class="{pcolor:pc,psize:ps}">Hello World</p>
+    <p v-bind:class="stylex">song zhi yang</p>
+<button v-on:click="changeColor">改变颜色</button>
+<button v-on:click="changeSize">改变字号</button>
+</div>
+<script src="../js/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            pc:true, //pcolor:pc中的pc true表示应用样式
+            ps:false, //psize:ps中的ps false不使用样式
+        },
+        methods:{
+            //点击按钮改变样式
+            changeColor(){
+                this.pc=!this.pc
+                // alert(123)
+            },
+            changeSize(){
+                this.ps=!this.ps
+            }
+        },
+        computed:{
+            stylex(){
+                return{
+                    pcolor:this.pc,
+                    psize:this.ps
+                }
+            }
+        },
+    })
+</script>
+</body>
+</html>

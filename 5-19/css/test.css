@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.gan{
+    width: 100%;
+    height: 800px;
+    background-color: aqua;
+}
+
+.gan .top1{
+    width: 368px;
+    height: 499px;
+    background-color: blue;
+    /* position: relative; */
+}
+
+/* 左边地址栏 */
+.gan .top1 .left{
+    width: 58px;
+    height: 499px;
+    background-color: brown;
+    float: left;
+    /* position: absolute; */
+}
+
+.gan .top1 .left a{
+    margin-top: 35px;
+    display: block;
+    text-decoration: none;
+    color: #d7d7d7;
+}
+
+.gan .top1 .left a:hover{
+    background-color: black;
+}
+
+
+
+
+/* 右边图片 */
+.gan .top1 .right{
+    width: 310px;
+    height: 499px;
+    background-color: chartreuse;
+    /* position: absolute; */
+    float: left;
+}

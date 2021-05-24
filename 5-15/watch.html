@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        用户名：<input type="text" v-model.lazy="username"></br>
+        Email：<input type="text" v-model.lazy="useremail"></br>
+        手机号：<input type="text" v-model.lazy="mobile"></br>
+        密码：<input type="password" v-model="pass1"></br>
+        确认密码：<input type="password" v-model.lazy="pass2"></br>
+        <input type="submit" value="注册" v-on:click="regist" :disabled="regstatus">
+    </div>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                username:null,
+                useremail:null,
+                mobile:null,
+                pass1:null,
+                pass2:null,
+                regstatus:true,
+            },
+            methods:{
+                regist(){
+                    // alert(123)
+                    //获取input框里面的值
+                   let user_info={
+                       username:this.username,
+                       useremail:this.useremail,
+                       mobile:this.mobile,
+                       pass:this.pass2,
+                   }
+                   //请求注册接口
+                   let api="http://localhost:3001/user/regist"
+                   axios.post(api,user_info).then(function(res){
+                       console.log(res);
+                    alert("添加成功")
+                   })
+                }
+            },
+            //侦听器
+            watch:{
+                // 用户名
+                username(v){
+                    let aa=this
+                    //请求接口 检测用户名是否被占用
+                    console.log(v);
+                    //请求后台接口，检测用户名是否存在
+                    let api="http://localhost:3001/check/username?name="+v
+                    console.log(api);
+                    axios.get(api).then(function(res){
+                        console.log("服务器返回的数据：",res.data);
+                        // console.log(res);
+                        //根据错误码判断
+                        if(res.data.erron>0){
+                            alert("请换一个用户名")
+                            aa.username=null
+                        }else{
+                            
+                        }
+                    })
+                },
+                //邮箱 Email
+                useremail(v){
+                    let self=this
+                    //请求接口 检测用户名是否被占用
+                    console.log(v);
+                    //请求后台接口，检测用户名是否存在
+                    let api="http://localhost:3001/check/useremail?email="+v
+                    console.log(api);
+                    axios.get(api).then(function(res){
+                        console.log("服务器返回的数据：",res.data);
+                        // console.log(res);
+                        //根据错误码判断
+                        if(res.data.erron>0){
+                            alert("请换一个用户名")
+                            self.useremail=null
+                        }else{
+                            
+                        }
+                    })
+                },
+                 //手机号  mobile
+                 mobile(v){
+                    let self=this
+                    //请求接口 检测用户名是否被占用
+                    console.log(v);
+                    //请求后台接口，检测用户名是否存在
+                    let api="http://localhost:3001/check/mobile?mobile="+v
+                    console.log(api);
+                    axios.get(api).then(function(res){
+                        console.log("服务器返回的数据：",res.data);
+                        // console.log(res);
+                        //根据错误码判断
+                        if(res.data.erron>0){
+                            alert("请换一个用户名")
+                            self.mobile=null
+                        }else{
+                            
+                        }
+                    })
+                },
+                // 密码
+                pass2(v){
+                    let self=this
+                    if(v!=self.pass1){
+                        alert("确认密码和密码不一致")
+                        self.pass2=null
+                        self.regstatus=true
+                    }else{
+                        self.regstatus=false
+                    }
+                },
+            },
+        })
+    </script>
+</body>
+</html>

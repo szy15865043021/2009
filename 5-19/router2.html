@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>
+            <router-link to="/regist">注册</router-link>
+            <router-link to="/login">登录</router-link>
+        </p>
+
+        <router-view></router-view>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+    <script>
+        let regist={
+            template:'<div>用户名：<input type="text" name="username"><br>密码：<input type="password" name="pwd"><br>确认密码：<input type="text" name="upwd"></div>'
+        }
+        let login={
+            template:'<div>用户名：<input type="text" name="username"><br>密码：<input type="password" name="upwd"></div>'
+        }
+
+        // 定义路由
+        let routes=[
+            {path:"/",redirect:"/login"},  //路由重定向到新的路由
+            {path:"/regist",component:regist},
+            {path:"/login",component:login},
+        ]
+
+        // 实例router
+        let router=new VueRouter({
+            routes:routes
+        })
+
+        new Vue({
+            el:"#app",
+            router:router
+        })
+    </script>
+</body>
+</html>

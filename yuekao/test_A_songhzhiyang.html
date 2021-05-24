@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to='/tian'>添加</router-link>
+        <router-link to='/cha'>查询</router-link>
+        <router-view></router-view>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        // 添加
+        let Tian = {
+            data() {
+                return {
+                    namea: "",
+                    price: "",
+                    cat: "",
+                    list: []
+                }
+            },
+            methods: {
+                btn() {
+                    let user_info = {
+                        namea: this.namea,
+                        price: this.price,
+                        cat: this.cat,
+                    }
+                    let self = this
+                    // let api="http://localhost:3001/name/tian"
+                    axios.post("http://localhost:3001/name/tian", user_info).then(function (res) {
+                        if (self.namea == "" && self.price == "" && self.cat == "") {
+                            alert("用户名不能为空")
+                            return
+                        } else {
+                            self.list.unshift(user_info);
+                            self.namea = "",
+                                self.price = "",
+                                self.cat = ""
+                            alert("添加成功")
+                        }
+
+                    })
+                },
+            },
+            template: ` <div>
+        产品名称：<input type="text"  v-model="namea">
+        类型：<input type="text" v-model="price">
+        售价：<input type="text" v-model="cat">
+        <input type="button" value="添加" @click="btn">
+        </div>`
+        }
+
+        //查询
+        let Cha = {
+            data() {
+                return {
+                    id: "",
+                    cat: "",
+                    list: []
+                }
+            },
+            created() {
+                let self = this
+                let api = "http://localhost:3001/name/list"
+                axios.get(api).then(function (res) {
+                    self.list = res.data
+                })
+            },
+            methods: {
+                del(i) {
+                    //   alert(this.list[i].id)
+                    let self = this
+                    let id = this.list[i].id
+                    axios.delete("http://localhost:3001/name/del?id=" + id).then(function (res) {
+                        self.list.splice(i, 1)
+                        alert("删除成功")
+                    })
+                },
+                cha() {
+                    let self = this
+                    // let api="http://localhost:3001/name/cha"
+                    let info = {
+                        id: this.id,
+                        // cat: this.cat,
+                    }
+                    axios.post("http://localhost:3001/name/cha", info).then(function (res) {
+                        self.list = res.data
+                    })
+                },
+                yi() {
+                    let self = this
+                    let api = "http://localhost:3001/name/list"
+                    axios.get(api).then(function (res) {
+                        self.list = res.data
+                    })
+                },
+                er(){
+                    let self = this
+                    let api = "http://localhost:3001/name/list2"
+                    axios.get(api).then(function (res) {
+                        self.list = res.data
+                    })
+                },
+            },
+            template: ` <div>
+                类型：<input type="text" v-model="cat"  placeholder="请输入类型">
+                关键字：<input type="text" v-model="id"  placeholder="请输入编号">
+                <input type="button" @click="cha" value="查询">
+                <table border="1">
+            <tr>
+                <th>编号</th>
+                <th>产品名称</th>
+                <th>类型</th>
+                <th>售价</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item,k) in list" :key="item.id">
+                <td>{{item.id}}</td>
+                <td>{{item.namea}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.cat}}</td>
+                <td><a href="" @click.prevent="del(k)">删除</a></td>
+            </tr>
+            
+        </table>
+        <a href="" @click.prevent="yi">1</a>
+        <a href="" @click.prevent="er">2</a>
+        
+        </div>`
+        }
+        // 定义路由
+        let routes = [
+            { path: "/tian", component: Tian },
+            { path: "/cha", component: Cha },
+        ]
+        // 实例 VueRouter
+        let router = new VueRouter({
+            routes: routes
+        })
+
+        new Vue({
+            el: "#app",
+            router: router,
+        })
+    </script>
+</body>
+
+</html>

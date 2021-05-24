@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        姓名：<input type="text" v-model.lazy="unamea">
+        年龄：<input type="text" v-model.lazy="unla">
+        工作：<input type="text" v-model.lazy="ugza">
+        民族：<input type="text" v-model.lazy="umza">
+        <input type="button" @click="add" value="添加">
+        <input type="button"  value="删除">
+        <table border="1">
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>工作</th>
+                <th>民族</th>
+                <th>操作</th>
+            </tr>
+            <tr  v-for="(item,k) in list" :key="item.id">
+                <td>{{item.uname}}</td>
+                <td>{{item.unl}}</td>
+                <td>{{item.ugz}}</td>
+                <td>{{item.umz}}</td>
+                <td><a href="" @click.prevent=del(k)>删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                unamea:"",
+                unla:"",
+                ugza:"",
+                umza:"",
+                list:[] 
+            },
+            methods:{
+                add(){
+                    
+                    let user_info={
+                        uname:this.unamea,
+                        unl:this.unla,
+                        ugz:this.ugza,
+                        umz:this.umza
+                    }
+                    let self=this
+                    axios.post("http://localhost:3001/uname/add",user_info).then(function(res){
+                        self.list.unshift(user_info)
+                        // console.log(user_info);
+                        self.unamea=""
+                        self.unla=""
+                        self.ugza=""
+                        self.umza=""
+                    })
+                },
+                // 删除
+                del(i){
+                    // console.log(this.list[i].id);
+                    let id=this.list[i].id
+                    let self=this
+                    axios.delete("http://localhost:3001/uname/del?id="+id).then(function(res){
+                        // self.list=res.data
+                        self.list.splice(i,1)
+                    })
+                }
+            },
+            created(){
+                let self=this
+                let api="http://localhost:3001/uname/list"
+                axios.get(api).then(function(res){
+                    self.list=res.data
+                })
+            }
+        })
+    </script>
+</body>
+</html>

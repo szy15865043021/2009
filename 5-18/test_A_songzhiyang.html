@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        登录名：<input type="text" v-model="user"><br>
+        密码：<input type="text" v-model="pwd"><br>
+        姓名：<input type="text" v-model="username"><br>
+        联系电话：<input type="text" v-model="tel"><br>
+        <input type="button" @:click="btn(k)" value="提交">
+        <hr/>
+        <table border="1">
+       <tr>
+           <th>编号</th>
+           <th>名字</th>
+           <th>角色</th>
+       </tr>
+       <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+       </tr>
+       </table>
+    </div>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                list:[]
+            },
+            created(){
+                //请求接口
+                let self=this
+                let api="http://localhost:3001/nan/list";
+                axios.get(api).then(function(res){
+                    self.list=res.data
+                })
+            },
+            methods:{
+                btn(){
+                    alert(123)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <router-view></router-view>
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/vue-router.js"></script>
+<script>
+let App={
+    data(){
+        return{
+            list:[
+                {id:1001,name:"zhangsan",email:"zhangsan@qq.com"},
+                {id:1002,name:"zhangsan",email:"zhangsan@qq.com"},
+                {id:1003,name:"zhangsan",email:"zhangsan@qq.com"},
+            ]
+        }
+    },
+    methods:{
+        showList(){
+            console.log(this.list)
+        }
+    },
+    template:`<div>
+<h1>这是App组件</h1>
+<!--<button @click="showList">读取list</button>-->
+<router-link to="/hello">Hello</router-link>
+<router-view></router-view>
+</div>`
+};
+
+let Hello={
+    methods:{
+        showList2() {
+            console.log(this.$parent.list)
+        }
+    },
+    template:`<div>
+<button @click="showList2">读取list2</button>
+</div>`
+}
+
+let Info={
+    methods:{
+        // 根据理由参数，读取list中数据
+        showInfo(index){
+            console.log(this.$parent.list[index])
+        }
+
+    },
+    template:`<div>路由参数：{{$route.params.index}}
+    <button @click="showInfo($route.params.index)">显示详细信息</button>
+</div>`
+}
+//定义一个组件
+
+    //定义路由
+    let routes=[
+{path:"/",component:App,children:[
+        {path:"/hello",component: Hello},
+        {path:"/list/:index",component:Info},
+    ]}
+];
+
+    let router=new VueRouter({
+        routes:routes
+    })
+;
+    new Vue({
+        el:"#app",
+        router:router
+    });
+</script>
+</body>
+</html>

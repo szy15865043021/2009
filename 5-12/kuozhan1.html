@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let person = {
+        //     name: "aannan",
+        //     age: 11,
+        // }
+        // console.log(person);
+
+        // let p1 = { ...person }
+        // console.log(p1);
+
+        // let arr1 = [11, 22, 33, 44, 55]
+        // let obj1 = { ...arr1 } //扩展运算符会把数组转换成对象Object
+
+        // console.log(arr1)
+        // console.log(obj1)
+
+        // var nan = [...'hello'];
+        // console.log(nan);
+
+        // var abc={...Object(null) }
+        // console.log({...null })
+        // {}
+
+
+
+        //  console.log(obj['a' + 'bc'] = 123);
+        // let obj = {
+        //     ['h' + 'ello']() {
+        //         return 'hi';
+        //     }
+        // };
+        // console.log(obj.hello)
+
+        let obj1 = {
+            name: "zhangsan",
+            age: 11,
+            get name() {
+                console.log("正在读取name属性")
+            },
+            set name(v) {
+                console.log("新值为: ", v)
+            }
+        }
+
+        obj1.name        // 访问name属性 触发 get方法
+        obj1.name = "lisi"    // 修改 name属性 触发 set方法
+
+
+
+
+
+    </script>
+</body>
+
+</html>

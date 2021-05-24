@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- lazy获取侦听器最后一次 -->
+        Uame:<input type="text" v-model.lazy="username"><br>
+        Email:<input type="text" v-model.lazy="useremail">
+    </div>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                username:null,
+                useremail:null,
+            },
+            methods:{},
+            computed:{},
+            //侦听器
+            watch:{
+                username(v){
+                    let api_aa="http://localhost:5000/check/username?uname="+v
+                    axios.get(api_aa).then(function(res){
+                        console.log(res);
+                    })
+                },
+                useremail(v){
+                    console.log("Email:",v);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
